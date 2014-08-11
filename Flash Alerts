@@ -6,19 +6,11 @@
 // @include       http://maptest.newcompte.fr:*
 // @license       WTFPL
 // @author        happy
-// @version       0.2
+// @version       0.3
 // ==/UserScript==
 
-//add sound names to lists below to get flashes for additional sounds besides scoring
+//add sound names to lists on line 40 and 42 to get flashes for additional sounds besides scoring
 var	FlashDuration = 250; //in milliseconds
-
-//get team colors
-tagpro.socket.on("id", function(id) {
-    setTimeout(function(){
-    	teamColor = tagpro.players[id].team == 1 ? 'red' : 'blue';
-    	opponentColor = teamColor == 'red' ? 'blue' : 'red';
-    },600)
-})
 
 //add overlay to page and set CSS
 $("body").find("#sound").after('<div class="overlay"></div>');
@@ -38,9 +30,9 @@ tagpro.socket.on("sound", function(message) {
     //you can add these sound names into the if/ else if statments if you want flashes to occur when they play. 
     sound = message.s   
     if (["cheering","placeholder"].indexOf(sound)>-1) {
-        flashColor(teamColor)
+        flashColor(tagpro.players[tagpro.playerId].team == 1 ? "red" : "blue") //flash your team color
     } else if (["sigh","placeholder"].indexOf(sound)>-1) {
-        flashColor(opponentColor)
+        flashColor(tagpro.players[tagpro.playerId].team == 1 ? "blue" : "red") //flash opponent team color
     }
 });
 
@@ -50,7 +42,7 @@ function flashColor(c) {
     if (c == "red") {
         $(".overlay").css("background","rgba(200,0,0,0.5)")
     } else if (c == "blue") {
-        $(".overlay" ).css("background","rgba(0,0,200,.5)")
+        $(".overlay").css("background","rgba(0,0,200,0.5)")
     }
     setTimeout(function(){$('.overlay').css("background","rgba(0,0,0,0)")}, FlashDuration);
 }
