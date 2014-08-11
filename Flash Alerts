@@ -9,7 +9,7 @@
 // @version       0.3
 // ==/UserScript==
 
-//add sound names to lists on line 40 and 42 to get flashes for additional sounds besides scoring
+//add sound names to lists on line 32 and 34 to get flashes for additional sounds besides scoring
 var	FlashDuration = 250; //in milliseconds
 
 //add overlay to page and set CSS
