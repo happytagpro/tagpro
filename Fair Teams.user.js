@@ -4,6 +4,7 @@
 // @include       http://tagpro-*.koalabeast.com:*
 // @include       http://tangent.jukejuice.com:*
 // @include       http://maptest.newcompte.fr:*
+// @include       http://tagproandluckyspammersucksandunfortunatesniperisawesome.com*
 // @license       WTFPL
 // @author        happy
 // @version       0.1
@@ -11,11 +12,10 @@
 
 
 //set preferences HERE:
-automaticallySwitchTeams = true //whenever the conditions are satisfied AND all flags are in base, switch teams
+automaticallySwitchTeams = true //whenever the regular conditions are satisfied AND you don't have the flag, switch teams
 useUnfairTeamsWarning = true //tint the screen slightly when the other team has fewer players then your's does, but the team switching conditions are not met.
 requestSwitch = true //if conditions are met, request that someone on the other team to switch to yours
 //////////////////////
-
 
 //requests that someone switch teams in chat is limited to once per game.
 alreadyRequested = false 
@@ -32,7 +32,6 @@ tagpro.socket.on('chat',function(m){
         setTimeout(checkConditions,200)
     } 
 })
-
 //check team switching requirements if someone scores or drops the flag.
 tagpro.socket.on("sound", function(message) {  
     if (["friendlydrop"].indexOf(message.s )>-1) {
